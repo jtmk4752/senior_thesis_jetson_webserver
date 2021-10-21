@@ -3,7 +3,6 @@ import cv2
 import cupy as cp
 import json
 import os
-import pathlib
 
 # This is a demo of running face recognition on live video from your webcam. It's a little more complicated than the
 # other example, but it includes some basic performance tweaks to make things run a lot faster:
@@ -33,8 +32,9 @@ known_face_names = []
 #    enc_data = json_data["data"]
 #    known_face_encodings.append(enc_data)
 
-dir = pathlib.Path("./img_data")
-for f in os.listdir(dir):
+dir = "./img_data"
+for filename in os.listdir(dir):
+    f = open(dir + "/" + filename ,"r")
     json_data = json.load(f)
     name = json_data["name"]
     known_face_names.append(name)
