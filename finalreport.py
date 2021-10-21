@@ -5,6 +5,8 @@ import datetime
 import face_recognition
 import os
 import glob
+
+#./convert_module.py
 from convert_module import img_converter
 
 
@@ -17,12 +19,6 @@ env = lmdb.Environment("./dbbook")
 #img_folder_name = "img_data"
 #filepath = "./" + img_folder_name + "/*json"
 #if bool(glob.glob(filepath)):
-
-
-
-
-
-
 
 
 
