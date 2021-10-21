@@ -2,6 +2,7 @@ import face_recognition
 import cv2
 import cupy as cp
 import json
+import os
 
 # This is a demo of running face recognition on live video from your webcam. It's a little more complicated than the
 # other example, but it includes some basic performance tweaks to make things run a lot faster:
@@ -23,8 +24,16 @@ video_capture = cv2.VideoCapture(camSet2)
 known_face_encodings = []
 known_face_names = []
 
-for i in range(2):
-    f = open(str(i+1)+".json", 'r')
+#for i in range(2):
+#    f = open(str(i+1)+".json", 'r')
+#    json_data = json.load(f)
+#    name = json_data["name"]
+#    known_face_names.append(name)
+#    enc_data = json_data["data"]
+#    known_face_encodings.append(enc_data)
+
+dir = "./img_data"
+for f in os.listdir(dir):
     json_data = json.load(f)
     name = json_data["name"]
     known_face_names.append(name)
