@@ -53,6 +53,7 @@ def list():
         print(k, d)
     if zip(data,KEY):
         print("exist")
+        print(count)
     else:
         print("None")
     return {"data": data, "KEY": KEY}
