@@ -86,10 +86,10 @@ def submit():
         with env.begin(write=True) as txn:
             id = get_id(txn)
             txn.put(id.encode("utf8"), json.dumps(data).encode("utf8"))
-        
+
+        global cmd
         cmd.terminate()
         time.sleep(3)
-        global cmd
         cmd = subprocess.Popen(["python3","facerec_from_webcam_faster_json.py","--cpus","4","--tolerance","0.54"])
 
         return data
@@ -106,10 +106,9 @@ def delete(message):
         file_name = "./img_data" + "/" + data_delete_name +".json"
         os.remove(file_name)
         txn.delete(message.encode("utf8"))
-    
+    global cmd
     cmd.terminate()
     time.sleep(3)
-    global cmd
     cmd = subprocess.Popen(["python3","facerec_from_webcam_faster_json.py","--cpus","4","--tolerance","0.54"])    
     
     bottle.redirect("/")
