@@ -42,8 +42,8 @@ class SocketServer():
             while True:
                 # クライアントからデータ受信
                 rcv_data = client_socket.recv(DATESIZE)
-                print(rcv_data)
                 rcv_data_decode = int(rcv_data.decode("utf-8"))
+                print(rcv_data_decode)
                 if rcv_data_decode > 10:
                     # データ受信したデータをそのままクライアントへ送信
                     client_socket.send(b"1")
