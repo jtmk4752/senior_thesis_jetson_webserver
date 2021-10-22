@@ -39,7 +39,6 @@ def get_id(txn):
 def list():
     data = []
     KEY = []
-    count = 0
 
     with env.begin() as txn:
         cur = txn.cursor()
@@ -48,16 +47,12 @@ def list():
             d = json.loads(value.decode("utf8"))
             KEY.append(key)
             data.append(d)
-            count += 1
+
     for (d, k) in zip(data, KEY):
         print(k, d)
     if data:# if data[] has data
-        print("exist")
-        print(count)
-    else:#if data does not have data
-        print("None")
-        print(count)
-        print(bool(data))
+        pass
+    else:#if data[] does not have data
         bottle.redirect("/entry")
 
     return {"data": data, "KEY": KEY}
@@ -107,4 +102,4 @@ def delete(message):
     bottle.redirect("/")
 
 
-bottle.run(host='0.0.0.0',port=8080)
+bottle.run(host='0.0.0.0',port=8080,reloader=True)
