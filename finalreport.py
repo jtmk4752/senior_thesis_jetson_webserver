@@ -39,20 +39,22 @@ def get_id(txn):
 def list():
     data = []
     KEY = []
+    count = None
+
     with env.begin() as txn:
         cur = txn.cursor()
-        if cur :
-            print("True")
-        else :
-            print("False")
-
         for key, value in cur:
             key = key.decode("utf8")
             d = json.loads(value.decode("utf8"))
             KEY.append(key)
             data.append(d)
+            count += 1
     for (d, k) in zip(data, KEY):
         print(k, d)
+    if count == 0:
+        print("None")
+    else:
+        print("exist")
     return {"data": data, "KEY": KEY}
 
 @bottle.route("/entry")
