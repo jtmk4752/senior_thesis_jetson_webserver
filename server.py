@@ -43,7 +43,7 @@ class SocketServer():
                 # クライアントからデータ受信
                 rcv_data = client_socket.recv(DATESIZE)
                 rcv_data_decode = rcv_data.decode("utf-8")
-                if int(rcv_data_decode)>10:
+                if rcv_data_decode > 10:
                     # データ受信したデータをそのままクライアントへ送信
                     client_socket.send(1)
                     print('[{0}] recv date : {1}'.format(datetime.now().strftime(
