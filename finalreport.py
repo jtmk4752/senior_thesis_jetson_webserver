@@ -39,7 +39,7 @@ def get_id(txn):
 def list():
     data = []
     KEY = []
-    count = None
+    count = 0
 
     with env.begin() as txn:
         cur = txn.cursor()
