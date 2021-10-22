@@ -54,6 +54,7 @@ def list():
     if count == 0:
         print("None")
         print(count)
+        bottle.redirect("/entry")
     else:
         print("exist")
         print(count)
