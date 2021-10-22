@@ -102,4 +102,4 @@ def delete(message):
     bottle.redirect("/")
 
 
-bottle.run(host='0.0.0.0',port=8080,reloader=True)
+bottle.run(host='0.0.0.0',port=8080)
