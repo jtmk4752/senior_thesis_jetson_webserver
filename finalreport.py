@@ -89,7 +89,7 @@ def submit():
 
         global cmd
         cmd.terminate()
-        time.sleep(3)
+        time.sleep(5)
         cmd = subprocess.Popen(["python3","facerec_from_webcam_faster_json.py","--cpus","4","--tolerance","0.54"])
 
         return data
@@ -108,7 +108,7 @@ def delete(message):
         txn.delete(message.encode("utf8"))
     global cmd
     cmd.terminate()
-    time.sleep(3)
+    time.sleep(5)
     cmd = subprocess.Popen(["python3","facerec_from_webcam_faster_json.py","--cpus","4","--tolerance","0.54"])    
     
     bottle.redirect("/")
