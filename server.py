@@ -47,8 +47,8 @@ class SocketServer():
                 if rcv_data_decode > 10:
                     # データ受信したデータをそのままクライアントへ送信
                     client_socket.send(rcv_data)
-                    print('[{0}] recv date : {1}'.format(datetime.now().strftime(
-                        '%Y-%m-%d %H:%M:%S'), rcv_data_decode))
+ #                   print('[{0}] recv date : {1}'.format(datetime.now().strftime(
+ #                       '%Y-%m-%d %H:%M:%S'), rcv_data_decode))
                 else:
                     break
 
