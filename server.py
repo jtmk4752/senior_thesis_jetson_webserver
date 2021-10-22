@@ -42,12 +42,11 @@ class SocketServer():
             while True:
                 # クライアントからデータ受信
                 rcv_data = client_socket.recv(DATESIZE)
-                rcv_data_decode = rcv_data.decode()
-#                rcv_data_decode = rcv_data.decode("utf-8")
-                if int.from_bytes(rcv_data,"little") > 10:
+                rcv_data_decode = int(rcv_data.decode("utf-8"))
+                if rcv_data_decode > 10:
                     # データ受信したデータをそのままクライアントへ送信
-                    print(rcv_data,"+",rcv_data_decode)
-                    client_socket.send(rcv_data_decode)
+                    print(rcv_data_decode)
+                    client_socket.send(rcv_data)
                     print('[{0}] recv date : {1}'.format(datetime.now().strftime(
                         '%Y-%m-%d %H:%M:%S'), rcv_data_decode))
                 else:
