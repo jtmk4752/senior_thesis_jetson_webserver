@@ -2,16 +2,23 @@ import socket
 import threading
 from datetime import datetime
 
-HOST_IP = "192.168.0.1"  # サーバーのIPアドレス
+
+
+HOST_IP_1 = "192.168.0.1"  # サーバーのIPアドレス
+HOST_IP_2 = "192.168.0.2"
+
 PORT = 9979  # 使用するポート
 CLIENTNUM = 5  # クライアントの接続上限数
 DATESIZE = 1024  # 受信データバイト数
 
 
 class SocketServer():
-    def __init__(self, host, port):
+    def __init__(self, host, port, datasize, clientnum):
         self.host = host
         self.port = port
+        self.datasize = datasize
+        self.clientnum = clientnum
+        
 
     # サーバー起動
     def run_server(self):
@@ -20,7 +27,7 @@ class SocketServer():
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
             server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
             server_socket.bind((self.host, self.port))
-            server_socket.listen(CLIENTNUM)
+            server_socket.listen(self.clientnum)
             print('[{}] run server'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
 
             while True:
@@ -41,22 +48,20 @@ class SocketServer():
         with client_socket:
             while True:
                 # クライアントからデータ受信
-                rcv_data = client_socket.recv(DATESIZE)
+                rcv_data = client_socket.recv(self.datasize)
                 rcv_data_decode = int(rcv_data.decode("utf-8"))
                 print(rcv_data_decode)
                 if rcv_data_decode > 10:
                     # データ受信したデータをそのままクライアントへ送信
                     client_socket.send(b"1")
- #                   print('[{0}] recv date : {1}'.format(datetime.now().strftime(
- #                       '%Y-%m-%d %H:%M:%S'), rcv_data_decode))
                     break
+
                 else:
                     client_socket.send(b"0")
                     break
 
-        print('[{0}] disconnect client -> address : {1}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), address))
 
 
 if __name__ == "__main__":
 
-    SocketServer(HOST_IP, PORT).run_server()
+    SocketServer(HOST_IP_1, PORT, DATESIZE, CLIENTNUM).run_server()

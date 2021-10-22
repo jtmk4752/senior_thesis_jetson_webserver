@@ -41,6 +41,11 @@ def list():
     KEY = []
     with env.begin() as txn:
         cur = txn.cursor()
+        if cur :
+            print("True")
+        else :
+            print("False")
+
         for key, value in cur:
             key = key.decode("utf8")
             d = json.loads(value.decode("utf8"))
