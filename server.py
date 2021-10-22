@@ -50,7 +50,7 @@ class SocketServer():
  #                   print('[{0}] recv date : {1}'.format(datetime.now().strftime(
  #                       '%Y-%m-%d %H:%M:%S'), rcv_data_decode))
                 else:
-                    client_socket.send(b"1")
+                    client_socket.send(b"0")
                     break
 
         print('[{0}] disconnect client -> address : {1}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), address))
