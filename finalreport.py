@@ -51,10 +51,10 @@ def list():
             count += 1
     for (d, k) in zip(data, KEY):
         print(k, d)
-    if count == 0:
-        print("None")
-    else:
+    if zip(data,KEY):
         print("exist")
+    else:
+        print("None")
     return {"data": data, "KEY": KEY}
 
 @bottle.route("/entry")
