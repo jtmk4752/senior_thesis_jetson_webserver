@@ -49,6 +49,7 @@ class SocketServer():
                     client_socket.send(b"1")
  #                   print('[{0}] recv date : {1}'.format(datetime.now().strftime(
  #                       '%Y-%m-%d %H:%M:%S'), rcv_data_decode))
+                    break
                 else:
                     client_socket.send(b"0")
                     break
