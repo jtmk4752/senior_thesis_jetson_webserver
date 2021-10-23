@@ -22,7 +22,7 @@ class FaceRecognition():
 
     def reading(self):
         for filename in os.listdir(self.dir):
-            f = open(dir + "/" + filename ,"r")
+            f = open(self.dir + "/" + filename ,"r")
             json_data = json.load(f)
             name = json_data["name"]
             self.known_face_names.append(name)
@@ -33,7 +33,7 @@ class FaceRecognition():
     def running(self):
         while True:
             # Grab a single frame of video
-            ret, frame = video_capture.read()
+            ret, frame = self.video_capture.read()
 
             # Resize frame of video to 1/4 size for faster face recognition processing
             img_gpu_src = cv2.cuda_GpuMat()
@@ -47,15 +47,15 @@ class FaceRecognition():
             rgb_small_frame = small_frame[:, :, ::-1]
 
             # Only process every other frame of video to save time
-            if process_this_frame:
+            if self.process_this_frame:
                 # Find all the faces and face encodings in the current frame of video
-                face_locations = face_recognition.face_locations(rgb_small_frame)
-                face_encodings = face_recognition.face_encodings(rgb_small_frame, face_locations)
+                self.face_locations = face_recognition.face_locations(rgb_small_frame)
+                self.face_encodings = face_recognition.self.face_encodings(rgb_small_frame, self.face_locations)
 
-                face_names = []
-                for face_encoding in face_encodings:
+                self.face_names = []
+                for face_encoding in self.face_encodings:
                     # See if the face is a match for the known face(s)
-                    matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
+                    matches = face_recognition.compare_faces(self.known_face_encodings, face_encoding)
                     name = "Unknown"
 
                     # # If a match was found in known_face_encodings, just use the first one.
@@ -64,20 +64,20 @@ class FaceRecognition():
                     #     name = known_face_names[first_match_index]
 
                     # Or instead, use the known face with the smallest distance to the new face
-                    face_distances = face_recognition.face_distance(known_face_encodings, face_encoding)
+                    face_distances = face_recognition.face_distance(self.known_face_encodings, face_encoding)
                     face_distances_gpu = cp.asarray(face_distances)
 
                     best_match_index_gpu = cp.argmin(face_distances_gpu)
                     best_match_index = cp.asnumpy(best_match_index_gpu)
 
                     if matches[best_match_index]:
-                        name = known_face_names[best_match_index]
+                        name = self.known_face_names[best_match_index]
 
-                    face_names.append(name)
+                    self.face_names.append(name)
                     print(name)
 
-    def terminate():
-        video_capture.release()
+    def terminate(self):
+        self.video_capture.release()
         cv2.destroyAllWindows()
 
 
