@@ -20,8 +20,8 @@ class FaceRecognition():
     face_names = []
     process_this_frame = True
 
-    def reading():
-        for filename in os.listdir(dir):
+    def reading(self):
+        for filename in os.listdir(self.dir):
             f = open(dir + "/" + filename ,"r")
             json_data = json.load(f)
             name = json_data["name"]
