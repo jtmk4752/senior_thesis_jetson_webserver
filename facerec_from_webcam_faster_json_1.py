@@ -20,7 +20,7 @@ class FaceRecognition():
     face_names = []
     process_this_frame = True
 
-    def reading(self):
+    def read(self):
         for filename in os.listdir(self.dir):
             f = open(self.dir + "/" + filename ,"r")
             json_data = json.load(f)
@@ -30,7 +30,7 @@ class FaceRecognition():
             self.known_face_encodings.append(enc_data)
     
 
-    def running(self):
+    def run(self):
         while True:
             # Grab a single frame of video
             ret, frame = self.video_capture.read()
@@ -76,14 +76,14 @@ class FaceRecognition():
                     self.face_names.append(name)
                     print(name)
 
-    def terminate(self):
-        self.video_capture.release()
-        cv2.destroyAllWindows()
+#    def terminate(self):
+#        self.video_capture.release()
+
 
 
 
 
 if __name__ == "__main__":
-    FaceRecognition().reading()
-    FaceRecognition().running()
-    FaceRecognition().terminate()
+    FaceRecognition().read()
+    FaceRecognition().run()
+#    FaceRecognition().terminate()
