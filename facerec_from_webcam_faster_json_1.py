@@ -76,7 +76,7 @@ class FaceRecognition():
 
                 self.face_names.append(name)
                 print("1:",name)
-                return name
+                return self.face_names[-1]
 
 
 
