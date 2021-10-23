@@ -12,16 +12,8 @@ import time
 from convert_module import img_converter
 
 
-
 env = lmdb.Environment("./dbbook")
 cmd=subprocess.Popen(["python3","facerec_from_webcam_faster_json.py","--cpus","4","--tolerance","0.54"])
-
-#validate after putting these files to Jetson nano
-#for starting docker images if there are json files
-#img_folder_name = "img_data"
-#filepath = "./" + img_folder_name + "/*json"
-#if bool(glob.glob(filepath)):
-
 
 
 def get_id(txn):

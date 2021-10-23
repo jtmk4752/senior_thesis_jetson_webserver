@@ -74,10 +74,9 @@ class FaceRecognition():
                         name = self.known_face_names[best_match_index]
 
                     self.face_names.append(name)
-                    print(name)
+                    print("1:",name)
+        print("2:",name)
 
-#    def terminate(self):
-#        self.video_capture.release()
 
 
 
@@ -86,4 +85,3 @@ class FaceRecognition():
 if __name__ == "__main__":
     FaceRecognition().read()
     FaceRecognition().run()
-#    FaceRecognition().terminate()
