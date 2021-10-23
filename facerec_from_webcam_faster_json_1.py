@@ -25,12 +25,12 @@ class FaceRecognition():
             f = open(dir + "/" + filename ,"r")
             json_data = json.load(f)
             name = json_data["name"]
-            known_face_names.append(name)
+            self.known_face_names.append(name)
             enc_data = json_data["data"]
-            known_face_encodings.append(enc_data)
+            self.known_face_encodings.append(enc_data)
     
 
-    def running():
+    def running(self):
         while True:
             # Grab a single frame of video
             ret, frame = video_capture.read()
