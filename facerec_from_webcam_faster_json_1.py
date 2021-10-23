@@ -4,8 +4,6 @@ import cupy as cp
 import json
 import os
 
-from raspberrypi.client import HOST_IP
-from webserver.server import HOST_IP_1
 
 class FaceRecognition():
 
