@@ -50,7 +50,7 @@ class FaceRecognition():
             if self.process_this_frame:
                 # Find all the faces and face encodings in the current frame of video
                 self.face_locations = face_recognition.face_locations(rgb_small_frame)
-                self.face_encodings = face_recognition.self.face_encodings(rgb_small_frame, self.face_locations)
+                self.face_encodings = face_recognition.face_encodings(rgb_small_frame, self.face_locations)
 
                 self.face_names = []
                 for face_encoding in self.face_encodings:
