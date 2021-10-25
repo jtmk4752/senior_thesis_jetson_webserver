@@ -58,7 +58,7 @@ def root():
 @bottle.route("/error")
 @bottle.view("error")
 def Error():
-    print("ファイルエラー")
+    print("file error")
 
 @bottle.post("/submit")
 @bottle.view("submit")
