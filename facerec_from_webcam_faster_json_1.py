@@ -73,7 +73,7 @@ class FaceRecognition():
 
                 if matches[best_match_index]:
                     name = self.known_face_names[best_match_index]
-                    if name is not None:
+                    if name != "None":
                         return name
 
                 #print(name)
