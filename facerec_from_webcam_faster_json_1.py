@@ -7,9 +7,9 @@ import os
 
 class FaceRecognition():
 
-    #camSet2=' tcpclientsrc host=192.168.0.2 port=8554 ! gdpdepay ! rtph264depay ! h264parse ! nvv4l2decoder  ! nvvidconv flip-method='+str(0)+' ! video/x-raw,format=BGRx ! videoconvert ! video/x-raw, width='+str(1296)+', height='+str(730)+',format=BGR ! appsink  drop=true sync=false '
-    camSet2='  udpsrc port=8554 ! gdpdepay ! rtph264depay ! h264parse ! nvv4l2decoder  ! nvvidconv flip-method='+str(0)+' ! video/x-raw,format=BGRx ! videoconvert ! video/x-raw, width='+str(1296)+', height='+str(730)+',format=BGR ! appsink  drop=true sync=false '
-    video_capture = cv2.VideoCapture(camSet2)
+    #camSet=' tcpclientsrc host=192.168.0.2 port=8554 ! gdpdepay ! rtph264depay ! h264parse ! nvv4l2decoder  ! nvvidconv flip-method='+str(0)+' ! video/x-raw,format=BGRx ! videoconvert ! video/x-raw, width='+str(1296)+', height='+str(730)+',format=BGR ! appsink  drop=true sync=false '
+    camSet='  udpsrc port=8554 ! gdpdepay ! rtph264depay ! h264parse ! nvv4l2decoder  ! nvvidconv flip-method='+str(0)+' ! video/x-raw,format=BGRx ! videoconvert ! video/x-raw, width='+str(1296)+', height='+str(730)+',format=BGR ! appsink  drop=true sync=false '
+    video_capture = cv2.VideoCapture(camSet)
 
     known_face_encodings = []
     known_face_names = []
@@ -18,8 +18,10 @@ class FaceRecognition():
     # Initialize some variables
     face_locations = []
     face_encodings = []
-    face_names = []
+    #face_names = []
     process_this_frame = True
+
+
 
     def read(self):
         for filename in os.listdir(self.dir):
@@ -54,7 +56,7 @@ class FaceRecognition():
                 self.face_locations = face_recognition.face_locations(rgb_small_frame)
                 self.face_encodings = face_recognition.face_encodings(rgb_small_frame, self.face_locations)
 
-                self.face_names = []
+                #self.face_names = []
                 for face_encoding in self.face_encodings:
                     # See if the face is a match for the known face(s)
                     matches = face_recognition.compare_faces(self.known_face_encodings, face_encoding)
@@ -75,12 +77,9 @@ class FaceRecognition():
                     if matches[best_match_index]:
                         name = self.known_face_names[best_match_index]
 
-                    self.face_names.append(name)
-                    self.name = name
-                    #print(name)
-                    #return name
+                    #self.face_names.append(name)
+                    print(name)
 
-            return self.name
 
 if __name__ == "__main__":
     FaceRecognition().read()
