@@ -76,7 +76,8 @@ class FaceRecognition():
                         name = self.known_face_names[best_match_index]
 
                     self.face_names.append(name)
-                    print(name)
+                    #print(name)
+                    return name
 
 
 if __name__ == "__main__":
