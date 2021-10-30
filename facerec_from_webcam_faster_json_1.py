@@ -21,8 +21,8 @@ class FaceRecognition():
     face_encodings = []
     process_this_frame = True
 
-    #def __init__(self):
-    #    self.read()
+    def __init__(self):
+        self.read()
 
     def read(self):
         for filename in os.listdir(self.dir):
@@ -81,10 +81,11 @@ class FaceRecognition():
 
 if __name__ == "__main__":
 
-    FaceRecognition().read()
+    #FaceRecognition().read()
     
     while True:
-        name = FaceRecognition().run()
+        face_reco = FaceRecognition()
+        name = face_reco.run()
         if name :
             print(name)
-        time.sleep(0.5)
+            time.sleep(0.5)
