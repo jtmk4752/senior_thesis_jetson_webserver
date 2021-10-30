@@ -3,6 +3,7 @@ import cv2
 import cupy as cp
 import json
 import os
+import time
 
 
 class FaceRecognition():
@@ -86,3 +87,4 @@ if __name__ == "__main__":
         name = FaceRecognition().run()
         if name :
             print(name)
+        time.sleep(0.5)
