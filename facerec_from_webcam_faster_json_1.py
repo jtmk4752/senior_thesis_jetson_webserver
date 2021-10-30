@@ -20,8 +20,8 @@ class FaceRecognition():
     face_encodings = []
     process_this_frame = True
 
-    def __init__(self):
-        self.read()
+    #def __init__(self):
+    #    self.read()
 
     def read(self):
         for filename in os.listdir(self.dir):
@@ -76,10 +76,12 @@ class FaceRecognition():
                     
                 return name
 
-                #print(name)
 
 
 if __name__ == "__main__":
+
+    FaceRecognition().read()
+    
     while True:
         name = FaceRecognition().run()
         if name :
