@@ -24,8 +24,6 @@ class FaceRecognition():
     def __init__(self):
        self.read()
 
-
-
     def read(self):
         for filename in os.listdir(self.dir):
             f = open(self.dir + "/" + filename ,"r")
@@ -34,8 +32,6 @@ class FaceRecognition():
             self.known_face_names.append(name)
             enc_data = json_data["data"]
             self.known_face_encodings.append(enc_data)
-
-
 
     def run(self):
         # Grab a single frame of video
@@ -81,11 +77,11 @@ class FaceRecognition():
                 return name
 
 
-
 if __name__ == "__main__":
     
     while True:
         name = FaceRecognition().run()
         if name :
+            
             print(name)
             time.sleep(0.5)
