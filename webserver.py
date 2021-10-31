@@ -14,12 +14,8 @@ from convert_module import img_converter
 
 
 env = lmdb.Environment("./dbbook")
-#try:
 cmd=subprocess.Popen(["python3","facerec_from_webcam_faster_json.py","--cpus","4","--tolerance","0.54"])
-#except KeyboardInterrupt:
-#    cmd.terminate()
-#    print("terminated subprocess")
-#    sys.exit
+
 
 def get_id(txn):
     cur = txn.cursor()
