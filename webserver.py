@@ -14,8 +14,10 @@ from convert_module import img_converter
 
 
 env = lmdb.Environment("./dbbook")
-cmd = subprocess.Popen(["python3","facerec_from_webcam_faster_json.py","--cpus","4","--tolerance","0.54"])
-
+try:
+    cmd = subprocess.Popen(["python3","facerec_from_webcam_faster_json.py","--cpus","4","--tolerance","0.54"])
+except:
+    bottle.redirect("/error_facerec")
 
 def get_id(txn):
     cur = txn.cursor()
@@ -60,6 +62,11 @@ def root():
 @bottle.view("error")
 def Error():
     print("file error")
+
+@bottle.route("/error_facerec")
+@bottle.view("error_facerec")
+def Error():
+    print("facerec error")
 
 @bottle.post("/submit")
 @bottle.view("submit")
