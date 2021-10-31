@@ -80,9 +80,8 @@ class FaceRecognition():
 
 
 if __name__ == "__main__":
-    
+    face_reco = FaceRecognition()
     while True:
-        face_reco = FaceRecognition()
         name = face_reco.run()
         if name :
             print(name)

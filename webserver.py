@@ -14,7 +14,7 @@ from convert_module import img_converter
 
 
 env = lmdb.Environment("./dbbook")
-cmd=subprocess.Popen(["python3","facerec_from_webcam_faster_json.py","--cpus","4","--tolerance","0.54"])
+cmd = subprocess.Popen(["python3","facerec_from_webcam_faster_json.py","--cpus","4","--tolerance","0.54"])
 
 
 def get_id(txn):
