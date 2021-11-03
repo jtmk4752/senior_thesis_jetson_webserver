@@ -37,7 +37,7 @@ class FaceRecognition():
         # Grab a single frame of video
         ret, frame = self.video_capture.read()
 
-        if any(frame):
+        if frame.any():
             pass
         else:
             print("no video")
