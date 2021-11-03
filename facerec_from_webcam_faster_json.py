@@ -38,7 +38,7 @@ class FaceRecognition():
         ret, frame = self.video_capture.read()
 
         if not ret:
-            break
+            print("no video")
 
         # Resize frame of video to 1/4 size for faster face recognition processing
         img_gpu_src = cv2.cuda_GpuMat()
