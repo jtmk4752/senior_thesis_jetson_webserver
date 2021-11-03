@@ -37,7 +37,9 @@ class FaceRecognition():
         # Grab a single frame of video
         ret, frame = self.video_capture.read()
 
-        if not ret:
+        if frame:
+            pass
+        else:
             print("no video")
 
         # Resize frame of video to 1/4 size for faster face recognition processing
