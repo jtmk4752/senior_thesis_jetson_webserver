@@ -35,7 +35,7 @@ class FaceRecognition():
             print("read data")
 
     def run(self):
-        print(self.known_face_encodings)
+        print(self.known_face_names)
         # Grab a single frame of video
         ret, frame = self.video_capture.read()
 
