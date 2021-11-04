@@ -58,8 +58,10 @@ class FaceRecognition():
 
         # Only process every other frame of video to save time
         if self.process_this_frame:
-            # Find all the faces and face encodings in the current frame of video
 
+            print("test")
+
+            # Find all the faces and face encodings in the current frame of video
             face_locations = face_recognition.face_locations(rgb_small_frame)
             face_encodings = face_recognition.face_encodings(rgb_small_frame, face_locations)
 
@@ -83,7 +85,6 @@ class FaceRecognition():
                 if matches[best_match_index]:
                     name = self.known_face_names[best_match_index]
                     
-                print(name)
                 return name
 
 env = lmdb.Environment("./dbbook")
