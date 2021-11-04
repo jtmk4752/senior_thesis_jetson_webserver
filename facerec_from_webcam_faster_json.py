@@ -4,6 +4,8 @@ import cupy as cp
 import json
 import os
 import time
+import lmdb
+import json
 
 
 class FaceRecognition():
@@ -87,6 +89,22 @@ class FaceRecognition():
                     
                 return name
 
+env = lmdb.Environment("./dbbook")
+
+def lmdb_search(name):
+    data=[]
+
+    with env.begin() as txn:
+        cur = txn.cursor()
+        for value in cur:
+            d=json.loads(value.decode("utf8"))
+            data.append(d)
+
+        for d in data:
+            if d["Name"] == name:
+                return d["IP"]
+
+
 
 if __name__ == "__main__":
     
@@ -94,5 +112,5 @@ if __name__ == "__main__":
         name = FaceRecognition().run()
         if name :
             
-            print(name)
+            print("Name:",name,"IP:",lmdb_search(name))
             time.sleep(0.5)
