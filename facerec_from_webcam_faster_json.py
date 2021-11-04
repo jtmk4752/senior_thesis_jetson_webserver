@@ -96,7 +96,7 @@ def lmdb_search(name):
 
     with env.begin() as txn:
         cur = txn.cursor()
-        for value in cur:
+        for _,value in cur:
             d=json.loads(value.decode("utf8"))
             data.append(d)
 
