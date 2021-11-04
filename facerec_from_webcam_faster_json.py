@@ -35,7 +35,6 @@ class FaceRecognition():
             print("read data")
 
     def run(self):
-        print(self.known_face_names)
         # Grab a single frame of video
         ret, frame = self.video_capture.read()
 
@@ -84,6 +83,7 @@ class FaceRecognition():
                 if matches[best_match_index]:
                     name = self.known_face_names[best_match_index]
                     
+                print(name)
                 return name
 
 env = lmdb.Environment("./dbbook")
