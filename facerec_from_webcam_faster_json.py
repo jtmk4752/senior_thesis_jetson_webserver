@@ -19,8 +19,6 @@ class FaceRecognition():
     dir = "./img_data"
 
     # Initialize some variables
-#    face_locations = []
-#    face_encodings = []
     process_this_frame = True
 
     def __init__(self):
@@ -34,6 +32,7 @@ class FaceRecognition():
             self.known_face_names.append(name)
             enc_data = json_data["data"]
             self.known_face_encodings.append(enc_data)
+            print("read data")
 
     def run(self):
         # Grab a single frame of video
@@ -61,16 +60,13 @@ class FaceRecognition():
         if self.process_this_frame:
             # Find all the faces and face encodings in the current frame of video
 
-#            self.face_locations = face_recognition.face_locations(rgb_small_frame)
-#            self.face_encodings = face_recognition.face_encodings(rgb_small_frame, self.face_locations)
-
             face_locations = face_recognition.face_locations(rgb_small_frame)
             face_encodings = face_recognition.face_encodings(rgb_small_frame, face_locations)
 
             for face_encoding in face_encodings:
                 # See if the face is a match for the known face(s)
                 matches = face_recognition.compare_faces(self.known_face_encodings, face_encoding)
-                name = "Unknown"
+                name = None
 
                 # # If a match was found in known_face_encodings, just use the first one.
                 # if True in matches:
