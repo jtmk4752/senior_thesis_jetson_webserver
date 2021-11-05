@@ -37,10 +37,12 @@ class SocketServer():
             print(
                 '[{0}] connect client -> address : {1}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), address))
             client_socket.settimeout(60)
+
+            self.conn_client(client_socket,address)
             # クライアントごとにThread起動 send/recvのやり取りをする
-            t = threading.Thread(target=self.conn_client, args=(client_socket, address))
-            t.setDaemon(True)
-            t.start()
+#            t = threading.Thread(target=self.conn_client, args=(client_socket, address))
+#            t.setDaemon(True)
+#            t.start()
 
     # クライアントごとにThread起動する関数
     def conn_client(self, client_socket, address):
