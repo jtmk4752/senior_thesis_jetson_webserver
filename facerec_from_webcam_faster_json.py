@@ -10,7 +10,7 @@ import json
 
 class FaceRecognition():
 
-    camSet=' tcpclientsrc host=192.168.200.2 port=8554 ! gdpdepay ! rtph264depay ! nvv4l2decoder  ! nvvidconv flip-method='+str(0)+' ! video/x-raw,format=BGRx ! videoconvert ! video/x-raw, width='+str(1024)+', height='+str(768)+',format=BGR ! appsink  drop=true sync=false '
+    camSet=' tcpclientsrc host=192.168.0.2 port=8554 ! gdpdepay ! rtph264depay ! nvv4l2decoder  ! nvvidconv flip-method='+str(0)+' ! video/x-raw,format=BGRx ! videoconvert ! video/x-raw, width='+str(1024)+', height='+str(768)+',format=BGR ! appsink  drop=true sync=false '
     #camSet='  udpsrc port=8554 ! gdpdepay ! rtph264depay ! nvv4l2decoder  ! nvvidconv flip-method='+str(0)+' ! video/x-raw,format=BGRx ! videoconvert ! video/x-raw, width='+str(1024)+', height='+str(768)+',format=BGR ! appsink  drop=true sync=false '
     video_capture = cv2.VideoCapture(camSet)
 
@@ -43,8 +43,8 @@ class FaceRecognition():
         else:
             print("no video")
 
-        face_locations = []
-        face_encodings = []
+        #face_locations = []
+        #face_encodings = []
 
         # Resize frame of video to 1/4 size for faster face recognition processing
         img_gpu_src = cv2.cuda_GpuMat()
@@ -106,8 +106,10 @@ def lmdb_search(name):
 
 if __name__ == "__main__":
     
+    FR=FaceRecognition()
     while True:
-        name = FaceRecognition().run()
+#        name = FaceRecognition().run()
+        name=FR.run()
         if name :
             
             print("Name:",name,"IP:",lmdb_search(name))
