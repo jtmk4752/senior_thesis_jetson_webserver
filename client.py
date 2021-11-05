@@ -45,11 +45,11 @@ if __name__ == '__main__':
     while True:
         try:
             client = SocketClient(HOST_IP, PORT,DATASIZE)
-            input_data =  True # ターミナルから入力された文字を取得
+            input_data =  10 # ターミナルから入力された文字を取得
             client.send_recv(input_data)
 
             client = SocketClient("192.168.200.3", PORT,DATASIZE)
-            input_data =  True # ターミナルから入力された文字を取得
+            input_data =  100 # ターミナルから入力された文字を取得
             client.send_recv(input_data)
             time.sleep(1)
 
