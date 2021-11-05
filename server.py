@@ -54,11 +54,11 @@ class SocketServer():
             if rcv_data_decode > 10:
                 # データ受信したデータをそのままクライアントへ送信
                 client_socket.send(b"1")
-                break
+#                break
 
             else:
                 client_socket.send(b"0")
-                break
+#                break
 
 
 
