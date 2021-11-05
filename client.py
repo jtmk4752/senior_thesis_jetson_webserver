@@ -1,16 +1,13 @@
 import socket
 import time
 from datetime import datetime
-from gpiozero import TonalBuzzer
-
-
 
 
 HOST_IP = "192.168.200.2"  # 接続するサーバーのIPアドレス
 
 PORT = 9979  # 接続するサーバーのポート
 DATASIZE = 1024  # 受信データバイト数
-piezo = TonalBuzzer(26)
+
 
 
 
@@ -36,12 +33,7 @@ class SocketClient():
             # サーバーからのデータを受信
             rcv_data = sock.recv(self.datasize)
             rcv_data = rcv_data.decode('utf-8')
-            if int(rcv_data) == 1:
-            	piezo.play('A4')
-            	time.sleep(3)
-            	piezo.stop()
-            else:
-            	pass
+
             print('[{0}] recv data : {1}'.format(
                 datetime.now().strftime('%Y-%m-%d %H:%M:%S'), rcv_data))
             time.sleep(1)
