@@ -3,17 +3,16 @@ import time
 from datetime import datetime
 from gpiozero import TonalBuzzer
 
-import board
-import adafruit_ina219
 
 
-HOST_IP = "192.168.200.1"  # 接続するサーバーのIPアドレス
+
+HOST_IP = "192.168.200.2"  # 接続するサーバーのIPアドレス
+
 PORT = 9979  # 接続するサーバーのポート
 DATASIZE = 1024  # 受信データバイト数
 piezo = TonalBuzzer(26)
 
-i2c=board.I2C()
-ina219=adafruit_ina219.INA219(i2c)
+
 
 
 class SocketClient():
@@ -50,12 +49,20 @@ class SocketClient():
 
 if __name__ == '__main__':
 
-    client = SocketClient(HOST_IP, PORT,DATASIZE)
+#    client = SocketClient(HOST_IP, PORT,DATASIZE)
     while True:
         try:
-            input_data =  ina219.current # ターミナルから入力された文字を取得
+            client = SocketClient(HOST_IP, PORT,DATASIZE)
+            input_data =  True # ターミナルから入力された文字を取得
             client.send_recv(input_data)
+
+            client = SocketClient("192.168.200.3", PORT,DATASIZE)
+            input_data =  True # ターミナルから入力された文字を取得
+            client.send_recv(input_data)
+            time.sleep(1)
+
         except KeyboardInterrupt:
             break
         except:
             pass
+        
