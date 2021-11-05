@@ -4,8 +4,8 @@ from datetime import datetime
 
 
 
-HOST_IP_1 = "192.168.0.1"  # サーバーのIPアドレス
-HOST_IP_2 = "192.168.0.2"
+HOST_IP_1 = "192.168.200.1"  # サーバーのIPアドレス
+HOST_IP_2 = "192.168.200.2"
 
 PORT = 9979  # 使用するポート
 CLIENTNUM = 5  # クライアントの接続上限数
