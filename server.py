@@ -46,19 +46,19 @@ class SocketServer():
     def conn_client(self, client_socket, address):
 
         with client_socket:
-            while True:
-                # クライアントからデータ受信
-                rcv_data = client_socket.recv(self.datasize)
-                rcv_data_decode = float(rcv_data.decode("utf-8"))
-                print(rcv_data_decode)
-                if rcv_data_decode > 10:
-                    # データ受信したデータをそのままクライアントへ送信
-                    client_socket.send(b"1")
-                    break
+#            while True:
+            # クライアントからデータ受信
+            rcv_data = client_socket.recv(self.datasize)
+            rcv_data_decode = float(rcv_data.decode("utf-8"))
+            print(rcv_data_decode)
+            if rcv_data_decode > 10:
+                # データ受信したデータをそのままクライアントへ送信
+                client_socket.send(b"1")
+                break
 
-                else:
-                    client_socket.send(b"0")
-                    break
+            else:
+                client_socket.send(b"0")
+                break
 
 
 

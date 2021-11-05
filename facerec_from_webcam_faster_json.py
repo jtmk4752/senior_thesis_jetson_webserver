@@ -106,10 +106,8 @@ def lmdb_search(name):
 
 if __name__ == "__main__":
     
-#    FR=FaceRecognition()
     while True:
         name = FaceRecognition().run()
-#        name=FR.run()
         if name :
             
             print("Name:",name,"IP:",lmdb_search(name))
