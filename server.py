@@ -30,17 +30,17 @@ class SocketServer():
             server_socket.listen(self.clientnum)
             print('[{}] run server'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
 
-            while True:
-                # クライアントからの接続要求受け入れ
-                client_socket, address = server_socket.accept()
-                # {0}は第0引数を、{1}は第1引数を意味する
-                print(
-                    '[{0}] connect client -> address : {1}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), address))
-                client_socket.settimeout(60)
-                # クライアントごとにThread起動 send/recvのやり取りをする
-                t = threading.Thread(target=self.conn_client, args=(client_socket, address))
-                t.setDaemon(True)
-                t.start()
+#            while True:
+            # クライアントからの接続要求受け入れ
+            client_socket, address = server_socket.accept()
+            # {0}は第0引数を、{1}は第1引数を意味する
+            print(
+                '[{0}] connect client -> address : {1}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), address))
+            client_socket.settimeout(60)
+            # クライアントごとにThread起動 send/recvのやり取りをする
+            t = threading.Thread(target=self.conn_client, args=(client_socket, address))
+            t.setDaemon(True)
+            t.start()
 
     # クライアントごとにThread起動する関数
     def conn_client(self, client_socket, address):
