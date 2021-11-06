@@ -63,6 +63,6 @@ if __name__ == '__main__':
 
     client2 = SocketClient("192.168.200.3",PORT)
     client2.connect()
-    client2.recv()
+    client2.send_rcv()
 #    client2.send_rcv()
     client2.socket.close()
