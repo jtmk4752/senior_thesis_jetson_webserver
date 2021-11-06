@@ -41,14 +41,13 @@ class SocketClient():
 
 if __name__ == '__main__':
 
-#    client = SocketClient(HOST_IP, PORT,DATASIZE)
+    client = SocketClient(HOST_IP, PORT,DATASIZE)
+    client2 = SocketClient("192.168.200.3", PORT,DATASIZE)
     while True:
         try:
-            client = SocketClient(HOST_IP, PORT,DATASIZE)
             input_data =  "10" # ターミナルから入力された文字を取得
             client.send_recv(input_data)
 
-            client2 = SocketClient("192.168.200.3", PORT,DATASIZE)
             input_data =  "100" # ターミナルから入力された文字を取得
             client2.send_recv(input_data)
             time.sleep(1)
