@@ -53,7 +53,7 @@ if __name__ == '__main__':
         try:
             input_data =  "10" # ターミナルから入力された文字を取得
             client.send_recv(input_data)
-            client.cloxe()
+            client.close()
 
             input_data =  "100" # ターミナルから入力された文字を取得
             client2.send_recv(input_data)
