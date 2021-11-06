@@ -53,11 +53,11 @@ if __name__ == '__main__':
         try:
             input_data =  "10" # ターミナルから入力された文字を取得
             client.send_recv(input_data)
-            client.close()
+#            client.close()
 
             input_data =  "100" # ターミナルから入力された文字を取得
             client2.send_recv(input_data)
-            client2.close()
+#            client2.close()
             time.sleep(1)
 
         except KeyboardInterrupt:
