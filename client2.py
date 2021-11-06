@@ -57,5 +57,6 @@ if __name__ == '__main__':
     
     client = SocketClient(HOST_IP, PORT)
     client.connect() # はじめの1回だけソケットをオープン
+    client.send_rcv("100000")
     time.sleep(2)
     client.socket.close()

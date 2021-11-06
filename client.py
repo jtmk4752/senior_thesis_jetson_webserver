@@ -37,10 +37,7 @@ class SocketClient():
             print('[{0}] recv data : {1}'.format(
                 datetime.now().strftime('%Y-%m-%d %H:%M:%S'), rcv_data))
             time.sleep(1)
-    
-    def close(self):
-        self.socket.close() # ソケットクローズ
-        self.socket = None
+
 
 
 if __name__ == '__main__':
@@ -51,9 +48,9 @@ if __name__ == '__main__':
 
     input_data =  "10" # ターミナルから入力された文字を取得
     client.send_recv(input_data)
-    client.close()
+    client.socket.close()
 
     input_data =  "100" # ターミナルから入力された文字を取得
     client2.send_recv(input_data)
-    client2.close()
+    client2.socket.close()
     time.sleep(1)
