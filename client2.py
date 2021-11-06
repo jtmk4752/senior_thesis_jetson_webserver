@@ -61,11 +61,5 @@ if __name__ == '__main__':
     
     client = SocketClient(HOST_IP, PORT)
     client.connect() # はじめの1回だけソケットをオープン
-    
-    while True:
-        if client.socket is not None:
-             # quitが戻ってくる(自分でquitと入力する)とソケットをクローズして終了
-            if client.send_rcv() == 'quit':
-                client.close()
-        else:
-            break
+    time.sleep(2)
+    client.close()
