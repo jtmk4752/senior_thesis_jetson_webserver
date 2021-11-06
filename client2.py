@@ -58,4 +58,4 @@ if __name__ == '__main__':
     client = SocketClient(HOST_IP, PORT)
     client.connect() # はじめの1回だけソケットをオープン
     time.sleep(2)
-    client.close()
+    client.socket.close()
