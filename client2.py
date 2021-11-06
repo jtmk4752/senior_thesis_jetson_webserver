@@ -54,8 +54,8 @@ class SocketClient():
     # ソケットをクローズする関数
     def close(self):
     
-        self.socket.close() # ソケットクローズ
-        self.socket = None
+        self.client_socket.close() # ソケットクローズ
+        self.client_socket = None
              
 if __name__ == '__main__':
     
