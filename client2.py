@@ -51,11 +51,7 @@ class SocketClient():
         self.send()
         return self.recv()
 
-    # ソケットをクローズする関数
-    def close(self):
-    
-        self.client_socket.close() # ソケットクローズ
-        self.client_socket = None
+
              
 if __name__ == '__main__':
     
