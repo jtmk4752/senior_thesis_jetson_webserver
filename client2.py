@@ -34,7 +34,7 @@ class SocketClient():
     # サーバーへデータ送信関数
     def send(self):
         # ターミナルから入力された文字を取得
-        input_data = input("send data:")
+        input_data = "1000000"
         print('[{0}] input data : {1}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), input_data) )
         input_data = input_data.encode('utf-8')
         self.socket.send(input_data) # データ送信
@@ -57,6 +57,6 @@ if __name__ == '__main__':
     
     client = SocketClient(HOST_IP, PORT)
     client.connect() # はじめの1回だけソケットをオープン
-    client.send_rcv("100000")
+    client.send_rcv()
     time.sleep(2)
     client.socket.close()
