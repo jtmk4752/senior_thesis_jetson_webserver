@@ -62,7 +62,6 @@ class FaceRecognition():
 
             # Find all the faces and face encodings in the current frame of video
             face_locations = face_recognition.face_locations(rgb_small_frame)
-            print(face_locations)
             face_encodings = face_recognition.face_encodings(rgb_small_frame, face_locations)
 
             for face_encoding in face_encodings:
@@ -113,4 +112,4 @@ if __name__ == "__main__":
         if name :
             
             print("Name:",name,"IP:",lmdb_search(name))
-            time.sleep(0.5)
+        time.sleep(0.5)
