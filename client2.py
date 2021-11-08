@@ -35,7 +35,6 @@ class SocketClient():
     def send(self):
         # ターミナルから入力された文字を取得
         input_data = "1000000"
-        print('[{0}] input data : {1}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), input_data) )
         input_data = input_data.encode('utf-8')
         self.socket.send(input_data) # データ送信
     
@@ -44,7 +43,6 @@ class SocketClient():
         rcv_data = self.socket.recv(DATESIZE) # データ受信
         rcv_data = rcv_data.decode('utf-8')
         rcv_data = float(rcv_data)
-        print('[{0}] recv data : {1}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), rcv_data) )
         return rcv_data
     
     # 上記の送信/受信関数を順番に行う
@@ -63,7 +61,7 @@ if __name__ == '__main__':
 
     client2 = SocketClient("192.168.200.3",PORT)
     client2.connect()
-    test = client2.send_rcv()
+    test = round(client2.send_rcv())
     print(test)
 #    client2.send_rcv()
     client2.socket.close()
