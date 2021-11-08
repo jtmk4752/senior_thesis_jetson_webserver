@@ -7,6 +7,8 @@ import time
 import lmdb
 import json
 
+from client2 import SocketClient
+
 
 class FaceRecognition():
 
@@ -106,11 +108,9 @@ def lmdb_search(name):
 
 if __name__ == "__main__":
     
-#    FR=FaceRecognition()
     while True:
         name = FaceRecognition().run()
-#        name=FR.run()
         if name :
-            
             print("Name:",name,"IP:",lmdb_search(name))
-        time.sleep(0.5)
+
+        time.sleep(1)

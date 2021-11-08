@@ -63,5 +63,4 @@ if __name__ == '__main__':
     client2.connect()
     test = round(client2.send_rcv())
     print(test)
-#    client2.send_rcv()
     client2.socket.close()
