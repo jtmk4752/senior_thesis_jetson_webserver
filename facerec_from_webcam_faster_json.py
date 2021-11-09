@@ -24,17 +24,17 @@ class FaceRecognition():
     # Initialize some variables
     process_this_frame = True
 
-#    def __init__(self):
-#       self.read()
+    def __init__(self):
+       self.read()
 
-#    def read(self):
-    for filename in os.listdir(dir):
-        f = open(dir + "/" + filename ,"r")
-        json_data = json.load(f)
-        name = json_data["name"]
-        known_face_names.append(name)
-        enc_data = json_data["data"]
-        known_face_encodings.append(enc_data)
+    def read(self):
+        for filename in os.listdir(self.dir):
+            f = open(self.dir + "/" + filename ,"r")
+            json_data = json.load(f)
+            name = json_data["name"]
+            self.known_face_names.append(name)
+            enc_data = json_data["data"]
+            self.known_face_encodings.append(enc_data)
 
     def run(self):
         # Grab a single frame of video
@@ -91,7 +91,7 @@ class FaceRecognition():
                     name = self.known_face_names[best_match_index]
     
                 return name
-            del face_encodings
+            del face_encodings, self.known_face_encodings, self.known_face_names
 
 env = lmdb.Environment("./dbbook")
 
