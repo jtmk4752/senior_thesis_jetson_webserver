@@ -25,8 +25,8 @@ class FaceRecognition():
     process_this_frame = True
 
     def __init__(self):
-        #self.known_face_encodings.clear()
-        #self.known_face_names.clear()
+        self.known_face_encodings.clear()
+        self.known_face_names.clear()
         self.read()
 
     def read(self):
