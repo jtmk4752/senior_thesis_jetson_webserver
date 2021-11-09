@@ -27,6 +27,7 @@ class FaceRecognition():
     def __init__(self):
         #self.known_face_encodings.clear()
         #self.known_face_names.clear()
+        del self.known_face_names, self.known_face_encodings
         self.read()
 
     def read(self):
