@@ -69,7 +69,6 @@ class FaceRecognition():
 
             # Find all the faces and face encodings in the current frame of video
             print("self.known_face_names",":",self.known_face_names)
-            print(rgb_small_frame)  
             face_locations = face_recognition.face_locations(rgb_small_frame)
             print(face_locations)
             face_encodings = face_recognition.face_encodings(rgb_small_frame, face_locations)
