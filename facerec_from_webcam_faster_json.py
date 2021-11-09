@@ -11,45 +11,32 @@ import datetime
 from client2 import SocketClient
 
 
-known_face_encodings = []
-known_face_names = []
-dir = "./img_data"
-
-for filename in os.listdir(dir):
-    f = open(dir + "/" + filename ,"r")
-    json_data = json.load(f)
-    name = json_data["name"]
-    known_face_names.append(name)
-    enc_data = json_data["data"]
-    known_face_encodings.append(enc_data)
-
-
 class FaceRecognition():
 
     camSet=' tcpclientsrc host=192.168.200.2 port=8554 ! gdpdepay ! rtph264depay ! nvv4l2decoder  ! nvvidconv flip-method='+str(0)+' ! video/x-raw,format=BGRx ! videoconvert ! video/x-raw, width='+str(1024)+', height='+str(768)+',format=BGR ! appsink  drop=true sync=false '
     #camSet='  udpsrc port=8554 ! gdpdepay ! rtph264depay ! nvv4l2decoder  ! nvvidconv flip-method='+str(0)+' ! video/x-raw,format=BGRx ! videoconvert ! video/x-raw, width='+str(1024)+', height='+str(768)+',format=BGR ! appsink  drop=true sync=false '
     video_capture = cv2.VideoCapture(camSet)
 
-#    known_face_encodings = []
-#    known_face_names = []
-#    dir = "./img_data"
+    known_face_encodings = []
+    known_face_names = []
+    dir = "./img_data"
 
     # Initialize some variables
     process_this_frame = True
 
-#    def __init__(self):
-#        self.known_face_encodings.clear()
-#        self.known_face_names.clear()
-#        self.read()
+    def __init__(self):
+        self.known_face_encodings.clear()
+        self.known_face_names.clear()
+        self.read()
 
-#    def read(self):
-#        for filename in os.listdir(self.dir):
-#            f = open(self.dir + "/" + filename ,"r")
-#            json_data = json.load(f)
-#            name = json_data["name"]
-#            self.known_face_names.append(name)
-#            enc_data = json_data["data"]
-#            self.known_face_encodings.append(enc_data)
+    def read(self):
+        for filename in os.listdir(self.dir):
+            f = open(self.dir + "/" + filename ,"r")
+            json_data = json.load(f)
+            name = json_data["name"]
+            self.known_face_names.append(name)
+            enc_data = json_data["data"]
+            self.known_face_encodings.append(enc_data)
 
     def run(self):
         # Grab a single frame of video
@@ -79,7 +66,7 @@ class FaceRecognition():
         if self.process_this_frame:
 
             # Find all the faces and face encodings in the current frame of video
-            print("self.known_face_names",":",known_face_names)
+            print("self.known_face_names",":",self.known_face_names)
             print(datetime.datetime.now())
             face_locations = face_recognition.face_locations(rgb_small_frame)
             print(face_locations)
@@ -87,7 +74,7 @@ class FaceRecognition():
             del face_locations
             for face_encoding in face_encodings:
                 # See if the face is a match for the known face(s)
-                matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
+                matches = face_recognition.compare_faces(self.known_face_encodings, face_encoding)
                 name = None
 
                 # # If a match was found in known_face_encodings, just use the first one.
@@ -96,14 +83,14 @@ class FaceRecognition():
                 #     name = known_face_names[first_match_index]
 
                 # Or instead, use the known face with the smallest distance to the new face
-                face_distances = face_recognition.face_distance(known_face_encodings, face_encoding)
+                face_distances = face_recognition.face_distance(self.known_face_encodings, face_encoding)
                 face_distances_gpu = cp.asarray(face_distances)
 
                 best_match_index_gpu = cp.argmin(face_distances_gpu)
                 best_match_index = cp.asnumpy(best_match_index_gpu)
 
                 if matches[best_match_index]:
-                    name = known_face_names[best_match_index]
+                    name = self.known_face_names[best_match_index]
     
                 return name
             del face_encodings #, self.known_face_encodings, self.known_face_names
