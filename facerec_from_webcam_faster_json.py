@@ -13,24 +13,20 @@ from client2 import SocketClient
 
 class FaceRecognition():
 
-    ##camSet=' tcpclientsrc host=192.168.200.2 port=8554 ! gdpdepay ! rtph264depay ! nvv4l2decoder  ! nvvidconv flip-method='+str(0)+' ! video/x-raw,format=BGRx ! videoconvert ! video/x-raw, width='+str(1024)+', height='+str(768)+',format=BGR ! appsink  drop=true sync=false '
+    camSet=' tcpclientsrc host=192.168.200.2 port=8554 ! gdpdepay ! rtph264depay ! nvv4l2decoder  ! nvvidconv flip-method='+str(0)+' ! video/x-raw,format=BGRx ! videoconvert ! video/x-raw, width='+str(1024)+', height='+str(768)+',format=BGR ! appsink  drop=true sync=false '
     #camSet='  udpsrc port=8554 ! gdpdepay ! rtph264depay ! nvv4l2decoder  ! nvvidconv flip-method='+str(0)+' ! video/x-raw,format=BGRx ! videoconvert ! video/x-raw, width='+str(1024)+', height='+str(768)+',format=BGR ! appsink  drop=true sync=false '
-    ##video_capture = cv2.VideoCapture(camSet)
+    video_capture = cv2.VideoCapture(camSet)
 
     #known_face_encodings = []
     #known_face_names = []
-    ##dir = "./img_data"
+    dir = "./img_data"
 
     # Initialize some variables
-    ##process_this_frame = True
+    process_this_frame = True
 
     def __init__(self):
         #self.known_face_encodings.clear()
         #self.known_face_names.clear()
-        self.camSet=' tcpclientsrc host=192.168.200.2 port=8554 ! gdpdepay ! rtph264depay ! nvv4l2decoder  ! nvvidconv flip-method='+str(0)+' ! video/x-raw,format=BGRx ! videoconvert ! video/x-raw, width='+str(1024)+', height='+str(768)+',format=BGR ! appsink  drop=true sync=false '
-        self.video_capture = cv2.VideoCapture(self.camSet)
-        self.dir = "./img_data"
-        self.process_this_frame = True
         
         self.known_face_encodings = []
         self.known_face_names = []
