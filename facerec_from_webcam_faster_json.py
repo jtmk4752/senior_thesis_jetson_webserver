@@ -88,7 +88,7 @@ class FaceRecognition():
                 if matches[best_match_index]:
                     name = self.known_face_names[best_match_index]
                     
-                return name
+            return name
 
 env = lmdb.Environment("./dbbook")
 
