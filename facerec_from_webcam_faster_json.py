@@ -28,8 +28,8 @@ class FaceRecognition():
         #self.known_face_encodings.clear()
         #self.known_face_names.clear()
         
-        self.known_face_encodings = []
-        self.known_face_names = []
+        #self.known_face_encodings = []
+        #self.known_face_names = []
         self.read()
 
     def read(self):
@@ -50,8 +50,8 @@ class FaceRecognition():
         else:
             print("no video")
 
-        face_locations = []
-        face_encodings = []
+        #face_locations = []
+        #face_encodings = []
 
         # Resize frame of video to 1/4 size for faster face recognition processing
         img_gpu_src = cv2.cuda_GpuMat()
