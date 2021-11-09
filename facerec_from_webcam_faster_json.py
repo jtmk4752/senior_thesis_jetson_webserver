@@ -91,7 +91,7 @@ class FaceRecognition():
                     name = self.known_face_names[best_match_index]
     
                 return name
-            del face_encodings, self.known_face_encodings, self.known_face_names
+            del face_encodings #, self.known_face_encodings, self.known_face_names
 
 env = lmdb.Environment("./dbbook")
 
@@ -116,5 +116,5 @@ if __name__ == "__main__":
         name = FaceRecognition().run()
         if name :
             print("Name:",name,"IP:",lmdb_search(name))
-
+        del name
         time.sleep(1)
