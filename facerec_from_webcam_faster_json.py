@@ -6,6 +6,7 @@ import os
 import time
 import lmdb
 import json
+import datetime
 
 from client2 import SocketClient
 
@@ -34,7 +35,6 @@ class FaceRecognition():
             self.known_face_names.append(name)
             enc_data = json_data["data"]
             self.known_face_encodings.append(enc_data)
-            print("read data")
 
     def run(self):
         # Grab a single frame of video
@@ -64,6 +64,8 @@ class FaceRecognition():
         if self.process_this_frame:
 
             # Find all the faces and face encodings in the current frame of video
+            print("self.known_face_encodings",":",self.known_face_encodings)
+            print(datetime.datetime.now())
             face_locations = face_recognition.face_locations(rgb_small_frame)
             print(face_locations)
             face_encodings = face_recognition.face_encodings(rgb_small_frame, face_locations)
