@@ -1,4 +1,4 @@
-__picache__/*
+__pycache__/*
 img_data/*
 !dummy.json
 
