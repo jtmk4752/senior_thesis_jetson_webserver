@@ -5,8 +5,6 @@ import json
 import os
 import time
 import lmdb
-import json
-import datetime
 
 from client2 import SocketClient
 
