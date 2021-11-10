@@ -110,6 +110,7 @@ while True:
             face_names.append(name)
             print("Name:", name, "IP", lmdb_search(name))
 #
+#
     #process_this_frame = not process_this_frame
 
     # Display the results
