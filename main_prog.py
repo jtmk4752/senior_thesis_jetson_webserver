@@ -119,7 +119,7 @@ while True:
 #        right *= 4
 #        bottom *= 4
 #        left *= 4
-
+#
         # Draw a box around the face
 #        cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
 
