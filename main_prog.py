@@ -30,6 +30,28 @@ known_face_encodings = []
 known_face_names = []
 dir = "./img_data"
 
+# Initialize some variables
+face_locations = []
+face_encodings = []
+face_names = []
+process_this_frame = True
+
+env = lmdb.Environment("./dbbook")
+
+def lmdb_search(name):
+    data=[]
+
+    with env.begin() as txn:
+        cur = txn.cursor()
+        for _,value in cur:
+            d=json.loads(value.decode("utf8"))
+            data.append(d)
+
+        for d in data:
+            if d["Name"] == name:
+                return d["IP"]
+
+
 for filename in os.listdir(dir):
     f = open(dir + "/" + filename, "r")
     json_data = json.load(f)
@@ -49,11 +71,7 @@ for filename in os.listdir(dir):
 #    known_face_encodings.append(enc_data)
 
 
-# Initialize some variables
-face_locations = []
-face_encodings = []
-face_names = []
-process_this_frame = True
+
 
 while True:
     # Grab a single frame of video
@@ -90,7 +108,7 @@ while True:
                 name = known_face_names[best_match_index]
 
             face_names.append(name)
-            print(name)
+            print("Name:", name, "IP", lmdb_search(name))
 
     #process_this_frame = not process_this_frame
 
