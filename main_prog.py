@@ -36,6 +36,7 @@ def lmdb_search(name):
 
         for d in data:
             if d["Name"] == name:
+                print(data)
                 return d["IP"]
 
 
@@ -60,7 +61,6 @@ while True:
     # Only process every other frame of video to save time
     # Find all the faces and face encodings in the current frame of video
     face_locations = face_recognition.face_locations(rgb_small_frame)
-    print(face_locations)
     face_encodings = face_recognition.face_encodings(rgb_small_frame, face_locations)
 
     for face_encoding in face_encodings:
@@ -79,8 +79,8 @@ while True:
         if matches[best_match_index]:
             name = known_face_names[best_match_index]
 
-        print("Name:", name, "IP", lmdb_search(name))
-        time.sleep(0.5)
+        if name :
+            print("Name:", name, "IP", lmdb_search(name))
 
 
 # Release handle to the webcam
