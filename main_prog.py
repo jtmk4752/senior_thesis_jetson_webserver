@@ -25,6 +25,11 @@ face_encodings = []
 
 env = lmdb.Environment("./dbbook")
 
+
+RaspiW_IP = "192.168.200.2"
+RaspiWH_IP = "192.168.200."
+PORT = 9979
+
 def lmdb_search(name):
     data=[]
 
@@ -36,7 +41,6 @@ def lmdb_search(name):
 
         for d in data:
             if d["Name"] == name:
-                print(data)
                 return d["IP"]
 
 
@@ -82,6 +86,17 @@ while True:
         if name :
             print("Name:", name, "IP", lmdb_search(name))
 
+            client = SocketClient(RaspiW_IP, PORT)
+            client.connect() # はじめの1回だけソケットをオープン
+            client.send_rcv()
+            client.socket.close()
+
+
+            client2 = SocketClient(RaspiWH_IP+"3",PORT)
+            client2.connect()
+            test = round(client2.send_rcv())
+            print(test)
+            client2.socket.close()
 
 # Release handle to the webcam
 video_capture.release()
