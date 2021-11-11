@@ -109,7 +109,7 @@ def delete(message):
     global cmd
     cmd.terminate()
     time.sleep(5)
-    cmd = subprocess.Popen(["python3","main_prog","--cpus","4","--tolerance","0.54"])    
+    cmd = subprocess.Popen(["python3","main_prog.py","--cpus","4","--tolerance","0.54"])    
     
     bottle.redirect("/")
 

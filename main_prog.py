@@ -86,17 +86,18 @@ while True:
         if name :
             print("Name:", name, "IP", lmdb_search(name))
 
-            client = SocketClient(RaspiW_IP, PORT)
-            client.connect() # はじめの1回だけソケットをオープン
-            client.send_rcv()
-            client.socket.close()
-
-
             client2 = SocketClient(RaspiWH_IP+"3",PORT)
             client2.connect()
-            test = round(client2.send_rcv())
-            print(test)
+            current_data = round(client2.send_rcv())
+            print(current_data)
             client2.socket.close()
+
+            if current_data > 10 :
+                client = SocketClient(RaspiW_IP, PORT)
+                client.connect() # はじめの1回だけソケットをオープン
+                client.send_rcv()
+                client.socket.close()
+
 
 # Release handle to the webcam
 video_capture.release()
