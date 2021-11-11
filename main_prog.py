@@ -80,6 +80,7 @@ while True:
             name = known_face_names[best_match_index]
 
         print("Name:", name, "IP", lmdb_search(name))
+        time.sleep(0.5)
 
 
 # Release handle to the webcam
