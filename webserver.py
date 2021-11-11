@@ -15,7 +15,7 @@ from convert_module import img_converter
 
 env = lmdb.Environment("./dbbook")
 try:
-    cmd = subprocess.Popen(["python3","facerec_from_webcam_faster_json.py","--cpus","4","--tolerance","0.54"])
+    cmd = subprocess.Popen(["python3","main_prog.py","--cpus","4","--tolerance","0.54"])
 except:
     bottle.redirect("/error_facerec")
 
@@ -90,7 +90,7 @@ def submit():
         global cmd
         cmd.terminate()
         time.sleep(5)
-        cmd = subprocess.Popen(["python3","facerec_from_webcam_faster_json.py","--cpus","4","--tolerance","0.54"])
+        cmd = subprocess.Popen(["python3","main_prog.py","--cpus","4","--tolerance","0.54"])
 
         return data
     else:
@@ -109,7 +109,7 @@ def delete(message):
     global cmd
     cmd.terminate()
     time.sleep(5)
-    cmd = subprocess.Popen(["python3","facerec_from_webcam_faster_json.py","--cpus","4","--tolerance","0.54"])    
+    cmd = subprocess.Popen(["python3","main_prog","--cpus","4","--tolerance","0.54"])    
     
     bottle.redirect("/")
 
