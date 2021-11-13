@@ -61,7 +61,7 @@ def Entry():
 
     with env.begin() as txn:
         cur = txn.cursor()
-        for value in cur:
+        for _, value in cur:
             d = json.loads(value.decode("utf8"))
             IP.remove(d["IP"])
     return {"IP": IP}
