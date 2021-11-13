@@ -55,8 +55,20 @@ def list():
     return {"data": data, "KEY": KEY}
 
 @bottle.route("/entry")
-def root():
-    return bottle.static_file("entry.html", root="./static")
+@bottle.view("entry")
+def Entry():
+    IP = list(range(3,255))
+
+    with env.begin() as txn:
+        cur = txn.cursor()
+        for value in cur:
+            d = json.loads(value.decode("utf8"))
+            IP.remove(d["IP"])
+    return {"IP": IP}
+
+
+#def root():    
+    #return bottle.static_file("entry.html", root="./static")
 
 @bottle.route("/error")
 @bottle.view("error")
