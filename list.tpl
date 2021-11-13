@@ -15,7 +15,7 @@
         %for (k,d) in zip(KEY,data):
         <tr>
         <td>{{d["Name"]}}</td>
-        <td>{{d["IP"]}}</td>
+        <td>192.168.200.{{d["IP"]}}</td>
         <td><a href="/delete/{{k}}">削除</a></td>
         </tr>
         %end

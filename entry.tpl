@@ -8,7 +8,7 @@
     <p>認識したい人とデバイスの情報を入力してください</p>
     <form action="submit" method="post" enctype="multipart/form-data">
       <p>名前(ローマ字):<input type="text" name="Name" /></p>
-      <p>IPアドレス:
+      <p>IPアドレス: 192.168.200.
         <select name="IP">
           %for i in IP:
             <option value="{{i}}">{{i}}</option>
