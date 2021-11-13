@@ -33,7 +33,7 @@ def get_id(txn):
 
 @bottle.route("/")
 @bottle.view("list")
-def list():
+def List():
     data = []
     KEY = []
 
