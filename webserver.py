@@ -57,7 +57,7 @@ def List():
 @bottle.route("/entry")
 @bottle.view("entry")
 def Entry():
-    IP = list(range(3,255))
+    IP = [str(x) for x in range(3,255)]
 
     with env.begin() as txn:
         cur = txn.cursor()
