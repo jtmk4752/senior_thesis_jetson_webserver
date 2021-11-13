@@ -86,7 +86,7 @@ while True:
         if name :
             print("Name:", name, "IP", lmdb_search(name))
 
-            client2 = SocketClient(RaspiWH_IP+"3",PORT)
+            client2 = SocketClient(RaspiWH_IP+lmdb_search(name),PORT)
             client2.connect()
             current_data = round(client2.send_rcv())
             print(current_data)

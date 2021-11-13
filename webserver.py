@@ -67,9 +67,6 @@ def Entry():
     return {"IP": IP}
 
 
-#def root():    
-    #return bottle.static_file("entry.html", root="./static")
-
 @bottle.route("/error")
 @bottle.view("error")
 def Error():
