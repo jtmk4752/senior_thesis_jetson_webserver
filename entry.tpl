@@ -11,7 +11,7 @@
       <p>IPアドレス:
         <select name="IP">
           %for i in IP:
-            <option value="">{{i}}</option>
+            <option value="192.168.200.{{i}}">{{i}}</option>
           %end
         </select>
       </p>
