@@ -6,7 +6,7 @@ HOST_IP = "192.168.200.2" # 接続するサーバーのIPアドレス
 PORT = 9979 # 接続するサーバーのポート
 DATESIZE = 1024 # 受信データバイト数
 INTERVAL = 3 # ソケット接続時のリトライ待ち時間
-RETRYTIMES = 5 # ソケット接続時のリトライ回数
+RETRYTIMES = 999 # ソケット接続時のリトライ回数
 
 class SocketClient():
 
@@ -33,7 +33,6 @@ class SocketClient():
  
     # サーバーへデータ送信関数
     def send(self):
-        # ターミナルから入力された文字を取得
         input_data = "1000000"
         input_data = input_data.encode('utf-8')
         self.socket.send(input_data) # データ送信
