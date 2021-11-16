@@ -32,8 +32,8 @@ class SocketClient():
                 print('[{0}] retry after wait{1}s'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), str(INTERVAL)) )
  
     # サーバーへデータ送信関数
-    def send(self):
-        input_data = "1000000"
+    def send(self,digit):
+        input_data = digit
         input_data = input_data.encode('utf-8')
         self.socket.send(input_data) # データ送信
     
@@ -45,11 +45,14 @@ class SocketClient():
         return rcv_data
     
     # 上記の送信/受信関数を順番に行う
-    def send_rcv(self):
-        self.send()
-        return self.recv()
+    def send_rcv(self,CD):
+        if CD == 1:#True
+            self.send("1000000")
+            return self.recv()
 
-
+        else:
+            self.send("0")
+            return self.recv()
              
 if __name__ == '__main__':
     

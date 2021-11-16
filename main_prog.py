@@ -88,14 +88,19 @@ while True:
 
             client2 = SocketClient(RaspiWH_IP+lmdb_search(name),PORT)
             client2.connect()
-            current_data = round(client2.send_rcv())
+            current_data = round(client2.send_rcv(1))
             print(current_data)
             client2.socket.close()
 
             if current_data > 10 :
                 client = SocketClient(RaspiW_IP, PORT)
                 client.connect() # はじめの1回だけソケットをオープン
-                client.send_rcv()
+                client.send_rcv(1)
+                client.socket.close()
+            else :
+                client = SocketClient(RaspiW_IP, PORT)
+                client.connect() # はじめの1回だけソケットをオープン
+                client.send_rcv(0)
                 client.socket.close()
 
 
