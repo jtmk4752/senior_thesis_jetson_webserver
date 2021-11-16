@@ -53,16 +53,3 @@ class SocketClient():
         else:
             self.send("0")
             return self.recv()
-             
-if __name__ == '__main__':
-    
-    client = SocketClient(HOST_IP, PORT)
-    client.connect() # はじめの1回だけソケットをオープン
-    client.send_rcv()
-    client.socket.close()
-
-    client2 = SocketClient("192.168.200.3",PORT)
-    client2.connect()
-    test = round(client2.send_rcv())
-    print(test)
-    client2.socket.close()
