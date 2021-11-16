@@ -101,8 +101,10 @@ while True:
                 client = SocketClient(RaspiW_IP, PORT)
                 client.connect() # はじめの1回だけソケットをオープン
                 client.send_rcv(0)
+
                 client.socket.close()
 
+            time.sleep(1)
 
 # Release handle to the webcam
 video_capture.release()
