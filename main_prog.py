@@ -9,7 +9,6 @@ import lmdb
 from client import SocketClient
 
 
-#camSet2=' tcpclientsrc host=192.168.200.2 port=8554 ! gdpdepay ! rtph264depay ! h264parse ! nvv4l2decoder  ! nvvidconv flip-method='+str(0)+' ! video/x-raw,format=BGRx ! videoconvert ! video/x-raw, width='+str(1296)+', height='+str(730)+',format=BGR ! appsink  drop=true sync=false '
 camSet2=' tcpclientsrc host=192.168.200.2 port=8554 ! gdpdepay ! rtph264depay ! nvv4l2decoder  ! nvvidconv flip-method='+str(0)+' ! video/x-raw,format=BGRx ! videoconvert ! video/x-raw, width='+str(1024)+', height='+str(768)+',format=BGR ! appsink  drop=true sync=false '
 
 video_capture = cv2.VideoCapture(camSet2)
@@ -42,7 +41,7 @@ def lmdb_search(name):
             if d["Name"] == name:
                 return d["IP"]
 
-def communicate(switch):
+def rasp_communicate(switch):
     client_W = SocketClient(RaspiW_IP, PORT)
     client_W.connect() # はじめの1回だけソケットをオープン
     if switch: #True->USB connected
@@ -75,23 +74,17 @@ while True:
     face_encodings = face_recognition.face_encodings(rgb_small_frame, face_locations)
 
     for face_encoding in face_encodings:
-        # See if the face is a match for the known face(s)
+
         matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
         name = ""
 
-        # # If a match was found in known_face_encodings, just use the first one.
-        # if True in matches:
-        #     first_match_index = matches.index(True)
-        #     name = known_face_names[first_match_index]
-
-        # Or instead, use the known face with the smallest distance to the new face
         face_distances = face_recognition.face_distance(known_face_encodings, face_encoding)
         best_match_index = np.argmin(face_distances)
         if matches[best_match_index]:
             name = known_face_names[best_match_index]
 
         if name :
-            print("Name:", name, "IP", lmdb_search(name))
+            print("Name:", name, "IP:", RaspiWH_IP, lmdb_search(name))
 
             client_WH = SocketClient(RaspiWH_IP+lmdb_search(name),PORT)
             client_WH.connect()
@@ -100,9 +93,9 @@ while True:
             client_WH.socket.close()
 
             if current_data > 10 :
-                communicate(True)
+                rasp_communicate(True)
             else :
-                communicate(False)
+                rasp_communicate(False)
 
             time.sleep(1)
 
