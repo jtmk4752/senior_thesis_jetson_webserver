@@ -45,11 +45,11 @@ class SocketClient():
         return rcv_data
     
     # 上記の送信/受信関数を順番に行う
-    def send_rcv(self,CD):
-        if CD == 1:#True
+    def send_rcv(self,switch):
+        if switch: #True->USB connected
             self.send("1000000")
             return self.recv()
 
-        else:
+        else: #False -> USB disconnected
             self.send("0")
             return self.recv()

@@ -6,7 +6,7 @@ import json
 import os
 import time
 import lmdb
-from client2 import SocketClient
+from client import SocketClient
 
 
 #camSet2=' tcpclientsrc host=192.168.200.2 port=8554 ! gdpdepay ! rtph264depay ! h264parse ! nvv4l2decoder  ! nvvidconv flip-method='+str(0)+' ! video/x-raw,format=BGRx ! videoconvert ! video/x-raw, width='+str(1296)+', height='+str(730)+',format=BGR ! appsink  drop=true sync=false '
@@ -25,7 +25,6 @@ face_encodings = []
 
 env = lmdb.Environment("./dbbook")
 
-
 RaspiW_IP = "192.168.200.2"
 RaspiWH_IP = "192.168.200."
 PORT = 9979
@@ -43,6 +42,14 @@ def lmdb_search(name):
             if d["Name"] == name:
                 return d["IP"]
 
+def communicate(switch):
+    client_W = SocketClient(RaspiW_IP, PORT)
+    client_W.connect() # はじめの1回だけソケットをオープン
+    if switch: #True->USB connected
+        client_W.send_rcv(True)
+    else: #False -> USB disconnected
+        client_W.send_rcv(False)
+    client_W.socket.close()
 
 for filename in os.listdir(dir):
     f = open(dir + "/" + filename, "r")
@@ -86,23 +93,16 @@ while True:
         if name :
             print("Name:", name, "IP", lmdb_search(name))
 
-            client2 = SocketClient(RaspiWH_IP+lmdb_search(name),PORT)
-            client2.connect()
-            current_data = round(client2.send_rcv(1))
-            print(current_data)
-            client2.socket.close()
+            client_WH = SocketClient(RaspiWH_IP+lmdb_search(name),PORT)
+            client_WH.connect()
+            current_data = round(client_WH.send_rcv(True))
+            print("current: ",current_data)
+            client_WH.socket.close()
 
             if current_data > 10 :
-                client = SocketClient(RaspiW_IP, PORT)
-                client.connect() # はじめの1回だけソケットをオープン
-                client.send_rcv(1)
-                client.socket.close()
+                communicate(True)
             else :
-                client = SocketClient(RaspiW_IP, PORT)
-                client.connect() # はじめの1回だけソケットをオープン
-                client.send_rcv(0)
-
-                client.socket.close()
+                communicate(False)
 
             time.sleep(1)
 
