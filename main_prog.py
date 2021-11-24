@@ -92,7 +92,7 @@ while True:
             print("current: ",current_data)
             client_WH.socket.close()
 
-            if current_data > 10 :
+            if current_data > 1 :
                 rasp_communicate(True)
             else :
                 rasp_communicate(False)
