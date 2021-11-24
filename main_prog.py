@@ -13,7 +13,7 @@ RaspiW_IP = "192.168.200.2"
 RaspiWH_IP = "192.168.200."
 PORT = 9979
 
-camSet2=" tcpclientsrc host="+RaspiW_IP+" port=8554 ! gdpdepay ! rtph264depay ! nvv4l2decoder  ! nvvidconv flip-method="+str(0)+" ! video/x-raw,format=BGRx ! videoconvert ! video/x-raw, width="+str(1024)+", height="+str(768)+",format=BGR ! appsink  drop=true sync=false "
+camSet2=' tcpclientsrc host='+RaspiW_IP+' port=8554 ! gdpdepay ! rtph264depay ! nvv4l2decoder  ! nvvidconv flip-method='+str(0)+' ! video/x-raw,format=BGRx ! videoconvert ! video/x-raw, width='+str(1024)+', height='+str(768)+',format=BGR ! appsink  drop=true sync=false '
 
 video_capture = cv2.VideoCapture(camSet2)
 
