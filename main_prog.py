@@ -9,26 +9,28 @@ import lmdb
 from client import SocketClient
 
 
-camSet2=' tcpclientsrc host=192.168.200.2 port=8554 ! gdpdepay ! rtph264depay ! nvv4l2decoder  ! nvvidconv flip-method='+str(0)+' ! video/x-raw,format=BGRx ! videoconvert ! video/x-raw, width='+str(1024)+', height='+str(768)+',format=BGR ! appsink  drop=true sync=false '
+RaspiW_IP = "192.168.200.2"
+RaspiWH_IP = "192.168.200."
+PORT = 9979
+
+camSet2=" tcpclientsrc host=" + RaspiW_IP + " port=8554 ! gdpdepay ! rtph264depay ! nvv4l2decoder  ! nvvidconv flip-method='+str(0)+' ! video/x-raw,format=BGRx ! videoconvert ! video/x-raw, width='+str(1024)+', height='+str(768)+',format=BGR ! appsink  drop=true sync=false "
 
 video_capture = cv2.VideoCapture(camSet2)
 
-# Create arrays of known face encodings and their names
+while not video_capture.isOpened():
+    video_capture = cv2.VideoCapture(camSet2)
+
+dir = "./img_data"
 known_face_encodings = []
 known_face_names = []
-dir = "./img_data"
 
-# Initialize some variables
 face_locations = []
 face_encodings = []
 
 env = lmdb.Environment("./dbbook")
 
-RaspiW_IP = "192.168.200.2"
-RaspiWH_IP = "192.168.200."
-PORT = 9979
 
-def lmdb_search(name):
+def lmdb_IP_search(name):
     data=[]
 
     with env.begin() as txn:
@@ -84,9 +86,10 @@ while True:
             name = known_face_names[best_match_index]
 
         if name :
-            print("Name:", name, "IP:", RaspiWH_IP, lmdb_search(name))
+            IP=RaspiWH_IP+lmdb_IP_search(name)
+            print("Name:", name, "IP:", IP)
 
-            client_WH = SocketClient(RaspiWH_IP+lmdb_search(name),PORT)
+            client_WH = SocketClient(IP,PORT)
             client_WH.connect()
             current_data = round(client_WH.send_rcv(True))
             print("current: ",current_data)
