@@ -92,10 +92,10 @@ while True:
             client_WH = SocketClient(IP,PORT)
             client_WH.connect()
             current_data = round(client_WH.send_rcv(True))
-            print("current: ",current_data)
+            print("current: ",current_data, " mA")
             client_WH.socket.close()
 
-            if current_data > 1 :
+            if current_data > 5 :#(mA)
                 rasp_communicate(True)
             else :
                 rasp_communicate(False)
